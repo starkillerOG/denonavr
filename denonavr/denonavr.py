@@ -469,7 +469,10 @@ class DenonAVR:
             if self.manufacturer is None and self.model_name is None:
                 executor.submit(self.get_device_info)
 
-            executor.submit(self._get_receiver_name)
+            if self._receiver_type == AVR_X_2016.type:
+                executor.submit(self._get_zone_name)
+            else:
+                executor.submit(self._get_receiver_name)
 
             # Determine if update_avr_2016 can be used for AVR_X receiver
             support_avr_2016 = None
